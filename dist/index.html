@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <link rel="stylesheet" href="/src/styles/style.css">
     <title>To Do</title>
 </head>
@@ -13,14 +13,23 @@
 <body>
     <div class="header">To-Do List</div>
     <div class="left-sidebar">
-        <div>Create New Task</div>
-    </div>
-    <div id="content">
-        <div class="create-task">
-
+        <div class='button-container'>
+            <button id='today'>Today</button>
+            <button id='this-week'>This Week</button>
         </div>
-
-
+        <div class='date-range-container'>
+            <label for="daterange">Select Date Range:</label>
+            <input type="date" id="date-range" name="daterange">
+            <input type="date" id="date-range" name="daterange">
+            <input type="submit">
+        </div>
+        <div class="add-btn-container">
+            <button id='add-task'>Add Task</button>
+            <button id='add-project'>Add Project</button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="to-do-entry"></div>
     </div>
 </body>
 

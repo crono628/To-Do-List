@@ -2,7 +2,7 @@
 ::before,
 ::after {
     box-sizing: border-box;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 body {
@@ -14,23 +14,93 @@ body {
 .header {
     display: flex;
     background-color: darkcyan;
-    height: 7vmax;
+    height: 70px;
     width: 100%;
     align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 10;
-    padding-left: 4vw;
-    margin-bottom: 2vw;
-    font-size: 6vmin;
+    padding-left: 80px;
+    font-size: 60px;
 }
 
 .left-sidebar {
     display: flex;
+    flex-direction: column;
     height: 100%;
-    width: 18vmax;
+    width: 170px;
     background-color: cadetblue;
     position: fixed;
     left: 0;
+    top: 0;
+}
+
+.left-sidebar button:hover {
+    background-color: darkcyan;
+    transition: 0.4s;
+}
+
+.left-sidebar button {
+    background-color: cadetblue;
+    transition: 0.4s;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container>button {
+    flex: 0 1 auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    width: 150px;
+    height: min-content;
+}
+
+.date-range-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 40px;
+    flex: 1 1 auto;
+}
+
+.add-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.add-btn-container>button {
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    border: solid red 10px;
+    margin-top: 75px;
+    margin-left: 175px;
+    width: 85vw;
+}
+
+.to-do-entry {
+    height: 200px;
+    width: 150px;
+    border: solid black 3px;
 }
