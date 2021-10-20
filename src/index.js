@@ -1,3 +1,5 @@
+import './styles/style.css'
+
 function dom(element, attributes = {}, text, parent) {
     const elem = document.createElement(element);
     if (attributes) {
