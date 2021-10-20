@@ -13,6 +13,7 @@ body {
 
 .header {
     display: flex;
+    flex-direction: row;
     background-color: darkcyan;
     height: 70px;
     width: 100%;
@@ -20,9 +21,66 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
-    padding-left: 80px;
-    font-size: 60px;
+    z-index: 1;
+}
+
+#title {
+    padding-left: 10px;
+    font-size: clamp(2rem, 7vw, 3.8rem);
+    display: flex;
+    width: 200px;
+    flex: 1;
+    flex-wrap: nowrap;
+}
+
+.add-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    gap: 25px;
+    padding-right: 50px;
+}
+
+.add-btn-container>button {
+    font-size: clamp(1rem, 4vw, 2rem);
+    border: none;
+    cursor: pointer;
+    background-color: darkcyan;
+    transition: 0.4s;
+}
+
+.add-btn-container>button:hover {
+    background-color: cadetblue;
+    transition: 0.4s;
+}
+
+.add-task-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 360px;
+    height: 100px;
+    top: 90px;
+    align-items: center;
+}
+
+.blank {
+    flex: 1;
+    background-color: none;
+    width: 50px;
+    height: 50px;
+}
+
+.add-task-form {
+    display: none;
+    flex-direction: column;
+    width: 170px;
+    height: 140px;
+    background-color: cadetblue;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 0px 30px 30px 30px;
 }
 
 .left-sidebar {
@@ -46,7 +104,11 @@ body {
     transition: 0.4s;
 }
 
-.button-container {
+.left-sidebar>div {
+    width: 170px;
+}
+
+.date-button-container {
     display: flex;
     flex-direction: column;
     margin-top: 100px;
@@ -55,7 +117,7 @@ body {
     align-items: center;
 }
 
-.button-container>button {
+.date-button-container>button {
     flex: 0 1 auto;
     background: none;
     border: none;
@@ -74,19 +136,17 @@ body {
     flex: 1 1 auto;
 }
 
-.add-btn-container {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    margin-bottom: 20px;
-    gap: 20px;
+#project-select {
+    width: 150px;
 }
 
-.add-btn-container>button {
-    font-size: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
+.selection-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
 .content {
@@ -97,10 +157,15 @@ body {
     margin-top: 75px;
     margin-left: 175px;
     width: 85vw;
+    position: ;
 }
 
 .to-do-entry {
     height: 200px;
     width: 150px;
     border: solid black 3px;
+}
+
+.show {
+    display: flex;
 }

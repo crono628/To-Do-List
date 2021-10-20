@@ -12,16 +12,40 @@ function dom(element, attributes = {}, text, parent) {
     return elem;
 }
 
+const entry = document.querySelector('.to-do-entry')
+const inputOne = document.querySelector('#input-one')
+const inputTwo = document.querySelector('#input-two')
 const content = document.querySelector(".content");
+const addForm = document.querySelector('.add-task-form')
+
+function tasker(theTask, date) {
+    dom('div', {
+        classList: 'task'
+    }, theTask, entry)
+    dom('div', {
+        classList: 'date'
+    }, date, entry)
+}
+
+function clear() {
+    inputOne.value = ''
+    inputTwo.value = ''
+}
 
 const btnHandler = document.querySelectorAll("button");
 btnHandler.forEach((btn) => {
     btn.addEventListener("click", () => {
         if (btn.id == "add-task") {
+            addForm.classList.toggle('show')
+        }
+        if (btn.id == "add-task-submit") {
+            addForm.classList.toggle('show')
             dom("div", {
                 classList: "to-do-entry"
             }, null, content);
-        } else return;
+            tasker(inputOne.value, inputTwo.value)
+            clear()
+        }
     });
 });
 
@@ -38,10 +62,3 @@ class Task {
         this.dueDate = dueDate
     }
 }
-
-
-const project = new Project('clean car')
-const task = new Task('vacuum', 'Nov 1')
-task.dueDate = 'oct 30'
-
-console.log(task);
