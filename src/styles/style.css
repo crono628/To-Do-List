@@ -3,6 +3,7 @@
 ::after {
     box-sizing: border-box;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    color: black;
 }
 
 body {
@@ -26,7 +27,7 @@ body {
 
 #title {
     padding-left: 10px;
-    font-size: clamp(2rem, 7vw, 3.8rem);
+    font-size: clamp(2rem, 6vw, 3.8rem);
     display: flex;
     width: 200px;
     flex: 1;
@@ -75,7 +76,7 @@ body {
 .add-task-form {
     display: none;
     flex-direction: column;
-    width: 170px;
+    width: 150px;
     height: 140px;
     background-color: cadetblue;
     align-items: center;
@@ -83,11 +84,23 @@ body {
     border-radius: 0px 30px 30px 30px;
 }
 
+.add-project-form {
+    display: none;
+    flex-direction: column;
+    width: 150px;
+    height: 140px;
+    background-color: cadetblue;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 0px 30px 30px 30px;
+}
+
+
 .left-sidebar {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 170px;
+    width: 130px;
     background-color: cadetblue;
     position: fixed;
     left: 0;
@@ -105,7 +118,7 @@ body {
 }
 
 .left-sidebar>div {
-    width: 170px;
+    width: 130px;
 }
 
 .date-button-container {
@@ -123,7 +136,7 @@ body {
     border: none;
     cursor: pointer;
     font-size: 30px;
-    width: 150px;
+    width: 110px;
     height: min-content;
 }
 
@@ -137,7 +150,7 @@ body {
 }
 
 #project-select {
-    width: 150px;
+    width: 110px;
 }
 
 .selection-div {
@@ -151,17 +164,18 @@ body {
 
 .content {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 25px;
     border: solid red 10px;
     margin-top: 75px;
-    margin-left: 175px;
+    margin-left: 125px;
     width: 85vw;
 }
 
 .to-do-entry {
-    height: 200px;
-    width: 150px;
+    height: 50px;
+    width: 60vw;
     border: solid black 3px;
 }
 
