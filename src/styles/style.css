@@ -60,7 +60,7 @@ body {
     border: solid black;
     gap: 5px;
     padding: 20px;
-    border-radius: 0 40px 40px 40px;
+    border-radius: 0 50px 50px 50px;
     background-color: darkcyan;
 }
 
@@ -72,9 +72,9 @@ body {
     top: 12vmin;
     right: 10vmin;
     border: solid black;
-    gap: 5px;
+    gap: 15px;
     padding: 20px;
-    border-radius: 40px 0 40px 40px;
+    border-radius: 50px 0 50px 50px;
     background-color: darkcyan;
 }
 
@@ -99,46 +99,57 @@ body {
 .project-list {
     display: flex;
     flex-direction: column;
-    gap: 2vmin;
-    font-size: 2.9vmin;
+    align-items: center;
+    font-size: clamp(0.1rem, 2.9vmin, 1rem);
     flex: 1 0 auto;
 }
 
-.project-list>li {
-    list-style: circle;
-    list-style-position: inside;
-    padding: 0 20px 0 10px;
+.project-list>div {
+    padding: 0 10px 0 10px;
     border-radius: 30px;
     background-color: inherit;
     transition: 0.4s;
 }
 
-.project-list>li:hover {
+.project-list>div:hover {
     background-color: darkcyan;
     transition: 0.4s;
     border-radius: 30px;
     cursor: pointer;
-    padding: 0 20px 0 10px;
+    padding: 0 10px 0 10px;
 }
 
-/* .date-selection-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 50px;
-    font-size: 3vmin;
-} */
+.project-name {
+    margin-top: 20px;
+}
+
+.delete-project {
+    margin-bottom: 90px;
+    font-size: clamp(0.1rem, 2.9vmin, 1rem);
+    border-radius: 30px;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.delete-project:hover {
+    background-color: darkcyan;
+    transition: 0.4s;
+    border-radius: 30px;
+    cursor: pointer;
+    color: darkred;
+}
 
 .task-container {
     display: flex;
     flex-direction: column;
     padding-top: 3.5vmin;
-    padding-left: clamp(150px, 30vmin, 200px);
+    padding-left: clamp(80px, 34vmin, 200px);
     font-size: 3vmin;
 }
 
-.task-list {
+.task-list,
+.due-by-list,
+.checkbox-list {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -147,7 +158,8 @@ body {
 }
 
 .task-list>div,
-.due-by-list>div {
+.due-by-list>div,
+.checkbox-list>div {
     list-style: circle;
     list-style-position: inside;
     border-radius: 30px;
@@ -159,7 +171,8 @@ body {
 }
 
 .task-list>div:hover,
-.due-by-list>div:hover {
+.due-by-list>div:hover,
+.checkbox-list>div:hover {
     background-color: darkcyan;
     transition: 0.3s;
     border-radius: 30px;
@@ -167,7 +180,8 @@ body {
     padding: 0 10px 0 10px;
 }
 
-.due-by-container {
+.due-by-container,
+.checkbox-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -178,15 +192,13 @@ body {
     font-size: 3vmin;
 }
 
-.due-by-list {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5vmin;
-    font-size: 2vmin;
-    align-items: flex-start;
-}
-
 .hide {
     display: none;
 }
+
+.complete {
+    text-decoration: line-through;
+    color: rgb(75, 75, 75);
+}
+
+.active {}
