@@ -13,49 +13,55 @@
 <body>
 
     <div class="header-container">
+
         <div class='title'>To-Do List</div>
+
         <div class='header-button-container'>
             <button data-header-btn="task">Add Task</button>
             <button data-header-btn="project">Add Project</button>
         </div>
+
         <div>
-            <form class="add-task-form hide" action="" data-add-task-form>
-                <input data-task-input type="text" value="" name="task-input" placeholder="Task">
+            <form data-form class="add-task-form hide" action="">
+                <input data-task-input type="text" value="" name="task-input" placeholder="Task Name">
                 <label for="due-by-input">Due By:</label>
                 <input data-date-input type="date" value="" name="due-by-input">
-                <button type="submit" value="">Submit</button>
+                <button data-form-submit="task" type="submit" value="">Submit</button>
+                <button data-form-cancel>Cancel</button>
             </form>
         </div>
+
         <div>
-            <form class="add-project-form hide" action="" data-add-project-form>
-                <input data-project-input type="text" value="" name="project-input" placeholder="Project">
-                <span><input data-priority-input type="checkbox" value="" name="high-priority">High Priority</span>
-                <button type="submit" value="">Submit</button>
+            <form data-form class="add-project-form hide" action="">
+                <input data-project-input type="text" maxlength='10' value="" name="project-input"
+                    placeholder="Project Name">
+                <button data-form-submit="project" type="submit" value="">Submit</button>
+                <button data-form-cancel>Cancel</button>
             </form>
         </div>
+
     </div>
 
     <div class="project-and-task-container">
-        <div class="project-container">Projects:
-            <ul class="project-list" data-project-list>
-            </ul>
+
+        <div class="project-container"><u>Projects:</u><br>
+            <div class="project-list" data-project-list></div>
+            <div data-delete-project="first-check" class="delete-project hide">Delete Current Project</div>
+            <div data-delete-project="confirm" class="confirm-delete hide"></div>
         </div>
 
-        <div class="task-container">Tasks:
-            <div class="task-list" data-task-list>
-                <div>Call</div>
-                <div>Type</div>
-                <div>Clean</div>
-            </div>
+        <div class="task-container"><u>Tasks:</u>
+            <div class="task-list" data-task-list></div>
         </div>
 
-        <div class="due-by-container">Due By:
-            <div class="due-by-list" data-due-by-list>
-                <div>10/31/2021</div>
-                <div>10/31/2021</div>
-                <div>10/31/2021</div>
-            </div>
+        <div class="due-by-container"><u>Due By:</u>
+            <div class="due-by-list" data-due-by-list></div>
         </div>
+
+        <div class="checkbox-container"><u>Complete:</u>
+            <div class="checkbox-list" data-checkbox-list></div>
+        </div>
+
     </div>
 
 </body>
