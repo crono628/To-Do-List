@@ -36,11 +36,11 @@ function dom(element, attributes = {}, text, parent) {
 function render() {
     clearLists(projectList)
     projects.forEach(project => {
-        thing = dom('div', {
+        let obj = dom('div', {
             classList: project.classList,
             id: project.id
         }, project.name, projectList)
-        thing.dataset.projectId = project.id
+        obj.dataset.projectId = project.id
     });
     closeForms()
 }
