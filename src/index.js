@@ -1,3 +1,5 @@
+import './styles/style.css';
+
 const headerButton = document.querySelectorAll("[data-header-btn]");
 const projectList = document.querySelector("[data-project-list]");
 const taskList = document.querySelector("[data-task-list]");
