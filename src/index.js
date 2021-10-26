@@ -13,11 +13,10 @@ const dataDateInput = document.querySelector("[data-date-input]");
 const dataProjectInput = document.querySelector("[data-project-input]");
 const dataDeleteProjectBtn = document.querySelectorAll("[data-delete-project]")
 const dataProjectIdentification = document.querySelectorAll("[data-project-id]")
-let projectDiv = projectList.childNodes
 
 let ls = require("local-storage")
 let projects = JSON.parse(ls("todo.projects")) || []
-let currentProjectId
+let currentProjectId = JSON.parse(ls("todo.currentProjectId"))
 
 function dom(element, attributes = {}, text, parent) {
     const elem = document.createElement(element);
@@ -35,18 +34,56 @@ function dom(element, attributes = {}, text, parent) {
 
 function render() {
     clearLists(projectList)
+    renderProjects()
+    const currentSelection = findCurrentProject(projects)
+    renderTasks(currentSelection)
+    closeForms()
+}
+
+function renderProjects() {
     projects.forEach(project => {
         let obj = dom('div', {
             classList: project.classList,
             id: project.id
         }, project.name, projectList)
-        obj.dataset.projectId = project.id
+        obj.dataset.arrayIndex = getIndex(project)
+        obj.addEventListener('click', (e) => {
+            currentProjectId = e.target.id
+            projectList.childNodes.forEach(child => {
+                child.classList.remove("active")
+            })
+            obj.classList.add("active")
+        })
     });
-    closeForms()
+}
+
+function renderTasks(currentProject) {
+    currentProject.tasks.forEach(listItem => {
+        let task = dom('div', {
+            classList: listItem.classList,
+            id: listItem.id
+        }, listItem.name, taskList)
+        dom('div', {
+            classList: listItem.classList,
+            id: listItem.id
+        }, listItem.dueDate, dueByList)
+        dom('div', {
+            classList: listItem.classList,
+            id: listItem.id
+        }, listItem.complete, checkboxList)
+        task.dataset.arrayIndex = getIndex(project)
+        task.addEventListener('click', (e) => {
+            taskList.childNodes.forEach(child => {
+                child.classList.remove("complete")
+            })
+            task.classList.add("complete")
+        })
+    });
 }
 
 function save() {
     ls("todo.projects", JSON.stringify(projects))
+    ls("todo.currentProjectId", JSON.stringify(currentProjectId))
 }
 
 function renderAndSave() {
@@ -66,9 +103,13 @@ function closeForms() {
     })
 }
 
-function findCurrentProject(list) {
-    list.find(item => item.id == currentProjectId)
-    return list
+function findCurrentProject(arr) {
+    let finder = arr.find(item => item.id === currentProjectId)
+    return finder
+}
+
+function getIndex(thing) {
+    return projects.indexOf(thing)
 }
 
 headerButton.forEach(btn => {
@@ -78,6 +119,9 @@ headerButton.forEach(btn => {
         })
         if (btn.dataset.headerBtn == "project") {
             document.querySelector('.add-project-form').classList.remove('hide')
+        }
+        if (btn.dataset.headerBtn == "task") {
+            document.querySelector('.add-task-form').classList.remove('hide')
         }
     })
 })
@@ -97,8 +141,17 @@ dataSubmitFormBtn.forEach(btn => {
             }
         }
         if (btn.dataset.formSubmit == "task") {
-            let newObj = new Task(dataTaskInput.value, dataDateInput.value)
-
+            if (dataTaskInput.value == null || dataTaskInput == '') {
+                return
+            } else {
+                let newObj = new Task(dataTaskInput.value, dataDateInput.value)
+                let currentProject = findCurrentProject(projects)
+                currentProject.tasks.push(newObj)
+                newObj.id = currentProjectId
+                dataTaskInput.value = null
+                dataDateInput.value = null
+                renderAndSave()
+            }
         }
     })
 })
@@ -110,13 +163,19 @@ dataCancelFormBtn.forEach(btn => {
     })
 })
 
-projectDiv.forEach(div => {
-    div.addEventListener("click", (e) => {
-        console.log('click')
+dataDeleteProjectBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.dataset.deleteProject == "first-check") {
+            document.querySelector('.confirm-delete').classList.toggle('hide')
+        }
+        if (btn.dataset.deleteProject == "confirm") {
+            let index = getIndex(findCurrentProject(projects))
+            document.querySelector('.confirm-delete').classList.toggle('hide')
+            projects.splice(index, 1)
+            renderAndSave()
+        }
     })
 })
-
-console.log(projectDiv);
 
 class Project {
     constructor(name) {
@@ -137,3 +196,4 @@ class Task {
 }
 
 renderAndSave()
+console.log(projects)

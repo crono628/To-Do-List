@@ -2,7 +2,7 @@
 ::before,
 ::after {
     box-sizing: border-box;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-family: Haettenschweiler, "Arial Narrow Bold", sans-serif;
     color: black;
 }
 
@@ -21,6 +21,7 @@ body {
     background-color: darkcyan;
     height: 10vmin;
     border-bottom: solid black 2px;
+    border-radius: 0px 0px 30px 30px;
 }
 
 .title {
@@ -78,6 +79,10 @@ body {
     background-color: darkcyan;
 }
 
+#project-title {
+    padding: 0px 15px 15px 15px;
+}
+
 .project-and-task-container {
     display: flex;
     flex-direction: row;
@@ -94,6 +99,7 @@ body {
     position: absolute;
     top: 10vmin;
     bottom: 0;
+    border-radius: 30px 30px 0px 0px;
 }
 
 .project-list {
@@ -125,9 +131,10 @@ body {
 
 .delete-project {
     margin-bottom: 90px;
-    font-size: clamp(0.1rem, 2.9vmin, 1rem);
+    font-size: clamp(0.1rem, 2.3vmin, 1rem);
     border-radius: 30px;
     transition: 0.4s;
+    padding: 0px 5px 0px 5px;
     cursor: pointer;
 }
 
@@ -137,6 +144,12 @@ body {
     border-radius: 30px;
     cursor: pointer;
     color: darkred;
+}
+
+.confirm-delete {
+    position: absolute;
+    bottom: 40px;
+    left: 20px
 }
 
 .task-container {
@@ -198,7 +211,14 @@ body {
 
 .complete {
     text-decoration: line-through;
-    color: rgb(75, 75, 75);
+
 }
 
-.active {}
+.active {
+    font-size: 1.4em;
+    color: darkcyan;
+}
+
+.active:hover {
+    color: black;
+}
