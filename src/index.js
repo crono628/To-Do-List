@@ -1,33 +1,55 @@
-const headerButton = document.querySelectorAll("[data-header-btn]");
-const projectList = document.querySelector("[data-project-list]");
-const taskList = document.querySelector("[data-task-list]");
-const dueByList = document.querySelector("[data-due-by-list]");
-const checkboxList = document.querySelector("[data-checkbox-list]");
-const dataForms = document.querySelectorAll("[data-form]");
-const dataSubmitFormBtn = document.querySelectorAll("[data-form-submit]");
-const dataCancelFormBtn = document.querySelectorAll("[data-form-cancel]");
-const dataTaskInput = document.querySelector("[data-task-input]");
-const dataDateInput = document.querySelector("[data-date-input]");
-const dataProjectInput = document.querySelector("[data-project-input]");
-const dataDeleteProjectBtn = document.querySelectorAll("[data-delete-project]");
+const headerButton = document.querySelectorAll("[data-header-btn]")
+const projectList = document.querySelector("[data-project-list]")
+const taskList = document.querySelector("[data-task-list]")
+const dueByList = document.querySelector("[data-due-by-list]")
+const checkboxList = document.querySelector("[data-checkbox-list]")
+const dataForms = document.querySelectorAll("[data-form]")
+const dataSubmitFormBtn = document.querySelectorAll("[data-form-submit]")
+const dataCancelFormBtn = document.querySelectorAll("[data-form-cancel]")
+const dataTaskInput = document.querySelector("[data-task-input]")
+const dataDateInput = document.querySelector("[data-date-input]")
+const dataProjectInput = document.querySelector("[data-project-input]")
+const dataDeleteProjectBtn = document.querySelectorAll("[data-delete-project]")
+
+function dom(element, attributes = {}, text, parent) {
+    const elem = document.createElement(element)
+    if (attributes) {
+        Object.assign(elem, attributes)
+    }
+    if (text) {
+        elem.innerText = text
+    }
+    if (parent) {
+        parent.appendChild(elem)
+    }
+    return elem
+}
 
 let ls = require("local-storage");
 let projects = JSON.parse(ls("todo.projects")) || []
 let currentProjectId = JSON.parse(ls("todo.currentProjectId"))
 
+function save() {
+    ls("todo.projects", JSON.stringify(projects))
+    ls("todo.currentProjectId", JSON.stringify(currentProjectId))
+}
 
-function dom(element, attributes = {}, text, parent) {
-    const elem = document.createElement(element);
-    if (attributes) {
-        Object.assign(elem, attributes);
+class Project {
+    constructor(name) {
+        this.name = name;
+        this.tasks = [];
+        this.id = Date.now().toString();
+        this.classList = "project-name active";
     }
-    if (text) {
-        elem.innerText = text;
+}
+
+class Task {
+    constructor(name, dueDate) {
+        this.name = name;
+        this.dueDate = dueDate;
+        this.complete = false;
+        this.classList = "task-name";
     }
-    if (parent) {
-        parent.appendChild(elem);
-    }
-    return elem;
 }
 
 function render() {
@@ -98,11 +120,6 @@ function renderTasks() {
     }
 }
 
-function save() {
-    ls("todo.projects", JSON.stringify(projects))
-    ls("todo.currentProjectId", JSON.stringify(currentProjectId))
-}
-
 function renderAndSave() {
     render();
     save();
@@ -130,7 +147,7 @@ function clearLists(element) {
 
 function clearTasks() {
     clearLists(dueByList);
-    clearLists(taskList);
+    clearLists(taskList)
     clearLists(checkboxList);
 }
 
@@ -176,6 +193,7 @@ dataSubmitFormBtn.forEach((btn) => {
                 dataProjectInput.value = null;
                 renderAndSave();
                 newProjectRender();
+                closeForms()
             }
         }
         if (btn.dataset.formSubmit == "task") {
@@ -190,6 +208,7 @@ dataSubmitFormBtn.forEach((btn) => {
                 dataDateInput.value = null;
                 renderTasks();
                 save();
+                closeForms()
             }
         }
     });
@@ -216,23 +235,5 @@ dataDeleteProjectBtn.forEach((btn) => {
         }
     });
 });
-
-class Project {
-    constructor(name) {
-        this.name = name;
-        this.tasks = [];
-        this.id = Date.now().toString();
-        this.classList = "project-name active";
-    }
-}
-
-class Task {
-    constructor(name, dueDate) {
-        this.name = name;
-        this.dueDate = dueDate;
-        this.complete = false;
-        this.classList = "task-name";
-    }
-}
 
 renderAndSave();
